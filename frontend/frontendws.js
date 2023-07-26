@@ -11,5 +11,3 @@ ws.addEventListener("open", () => {
 ws.addEventListener("message", msg => {
     msg = JSON.parse(msg);
 });
-
-module.exports = { send };
