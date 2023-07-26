@@ -6,9 +6,14 @@ expressWs(app)
 
 
 app.ws('/echo', (ws) => {
+	console.log("New client connected.");
+
     ws.on("message", data => {
         data = JSON.parse(data);
 	});
+	ws.on('close', () => {
+        console.log(`Client has disconnected!`);
+    });
 });
 
 const path=require('path');
