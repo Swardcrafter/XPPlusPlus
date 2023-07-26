@@ -1,13 +1,11 @@
-// File 2
-
-const ws = new WebSocket("wss://Obsidian-Syncify-Main.saturnwillow.repl.co/echo");
+const ws = new WebSocket("wss://obsidian-syncify-main.saturnwillow.repl.co/echo");
 
 function send(data) {
 	ws.send(JSON.stringify(data));
 }
 
 ws.addEventListener("open", () => {
-    console.log("We are connected");      
+    console.log("We are connected");   
 });
 
 ws.addEventListener("message", msg => {
