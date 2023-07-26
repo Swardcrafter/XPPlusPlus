@@ -29,8 +29,7 @@ app.get("/styles.css", (req, res) => {
   res.sendFile(path.join(oneStepBack, "frontend/styles.css"));
 });
 
-app.get("/index.js", (req, res) => {
-  // Send the index.js file
+app.get("/frontendws.js", (req, res) => {e
   res.sendFile(path.join(oneStepBack, "frontend/frontendws.js"));
 });
 app.listen(8081, function (err) {
