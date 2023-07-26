@@ -19,7 +19,7 @@ app.ws('/echo', (ws) => {
 
 const path=require('path');
 let oneStepBack=path.join(__dirname,'../');
-app.use("/backend", express.static(__dirname + '/backend'));
+app.use("/frontend", express.static(__dirname + '/frontend'));
 app.get("/", (req, res) => {
   // Send the index.html file
   res.sendFile(path.join(oneStepBack, "frontend/index.html"));
