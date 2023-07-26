@@ -22,16 +22,16 @@ let oneStepBack=path.join(__dirname,'../');
 app.use("/frontend", express.static(__dirname + '/frontend'));
 app.get("/", (req, res) => {
   // Send the index.html file
-  res.sendFile(path.join(oneStepBack, "frontend/index.html"));
+  res.sendFile(path.join(oneStepBack, "index.html"));
 });
 
 app.get("/styles.css", (req, res) => {
   // Send the styles.css file
-  res.sendFile(path.join(oneStepBack, "frontend/styles.css"));
+  res.sendFile(path.join(oneStepBack, "styles.css"));
 });
 
 app.get("/frontendws.js", (req, res) => {
-  res.sendFile(path.join(oneStepBack, "frontend/frontendws.js"));
+  res.sendFile(path.join(oneStepBack, "frontendws.js"));
 });
 app.listen(8081, function (err) {
     if (err) console.log(err);
