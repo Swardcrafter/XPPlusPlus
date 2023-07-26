@@ -1,4 +1,4 @@
-const ws = new WebSocket("wss://note-taking-app.LucienDuchateau.repl.co/echo");
+const ws = new WebSocket("wss://Obsidian-Syncify-Main.saturnwillow.repl.co/echo");
 
 ws.addEventListener("open", () => {
     console.log("We are connected");      
