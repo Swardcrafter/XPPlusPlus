@@ -19,7 +19,7 @@ app.ws('/echo', (ws) => {
 
 const path=require('path');
 let oneStepBack=path.join(__dirname,'../');
-app.use("/frontend", express.static(__dirname + '/frontend'));
+app.use("/frontend", express.static(path.join(__dirname, "frontend")));
 app.get("/", (req, res) => {
   // Send the index.html file
   res.sendFile(path.join(oneStepBack, "/frontend/index.html"));
@@ -27,11 +27,17 @@ app.get("/", (req, res) => {
 
 app.get("/styles.css", (req, res) => {
   // Send the styles.css file
+  res.setHeader("Content-Type", "text/css");
   res.sendFile(path.join(oneStepBack, "/frontend/styles.css"));
 });
 
 app.get("/frontendws.js", (req, res) => {
+	res.setHeader("Content-Type", "application/javascript");
   res.sendFile(path.join(oneStepBack, "/frontend/frontendws.js"));
+});
+app.get("/index.js", (req, res) => {
+	res.setHeader("Content-Type", "application/javascript");
+  res.sendFile(path.join(oneStepBack, "/frontend/index.js"));
 });
 app.listen(8081, function (err) {
     if (err) console.log(err);
