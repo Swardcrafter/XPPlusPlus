@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
 app.get("/styles.css", (req, res) => {
   // Send the styles.css file
   res.setHeader("Content-Type", "text/css");
-  res.sendFile(path.join(oneStepBack, "/frontend/styles.css"));
+  res.sendFile(path.join(oneStepBack, "/frontend/style.css"));
 });
 
 app.get("/frontendws.js", (req, res) => {
