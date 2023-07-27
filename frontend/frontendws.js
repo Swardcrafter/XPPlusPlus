@@ -12,7 +12,7 @@ ws.addEventListener("message", msg => {
     msg = JSON.parse(msg);
 });
 
-function handleFormSubmit(event) {
+function handleFormSubmitLog(event) {
 	event.preventDefault();
     // Get the form data using FormData API
     const form = event.target;
@@ -28,11 +28,32 @@ function handleFormSubmit(event) {
     const jsonData = JSON.stringify(formDataObj);
 
 
-    console.log(jsonData);
+    console.log(`Logging in with: ${jsonData}`);
+    
+ }
+ function handleFormSubmitSign(event) {
+	event.preventDefault();
+    // Get the form data using FormData API
+    const form = event.target;
+    const formData = new FormData(form);
+
+    // Convert the FormData object to a regular object
+    const formDataObj = {};
+    formData.forEach((value, key) => {
+      formDataObj[key] = value;
+    });
+
+    // Convert the object to JSON
+    const jsonData = JSON.stringify(formDataObj);
+
+
+    console.log(`Signing up with: ${jsonData}`);
     
  }
 
- const formsContainer = document.getElementById('formsContainer');
+ const logForm = document.getElementById('logForm');
+ const signForm = document.getElementById('signForm');
 
  // Add the event listener to the forms container for form submissions
- formsContainer.addEventListener('submit', handleFormSubmit);
+ logForm.addEventListener('submit', handleFormSubmitLog);
+ signForm.addEventListener('submit', handleFormSubmitSign);
