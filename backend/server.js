@@ -68,7 +68,7 @@ function checkForUsername(username) {
 }
 
 function createAccount(username, email, password) {
-  db.username = {
+  db[username] = {
     email: email, 
     password: password
   };
