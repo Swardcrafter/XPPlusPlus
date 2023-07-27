@@ -62,7 +62,7 @@ function logIn(username, password, ws) {
     if(found == false) {
       ws.send(JSON.stringify({type: "error", error: "noAccount"}));
     } else if (found == true) {
-      if(data[username].password == password) {
+      if(db[username].password == password) {
         ws.send(JSON.stringify({
           type: "log", 
           userInfo: {
