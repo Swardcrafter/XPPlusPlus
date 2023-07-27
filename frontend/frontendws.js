@@ -1,5 +1,10 @@
 const ws = new WebSocket("wss://obsidian-syncify-main.saturnwillow.repl.co/echo");
 
+let loggedUsername = "";
+let loggedPassword = "";
+
+document.getElementById("main").style.display = 'none';
+
 function send(data) {
 	ws.send(JSON.stringify(data));
 }
@@ -31,6 +36,9 @@ ws.addEventListener("message", msg => {
             inputElement = document.getElementById("passwordInputLog");
             setInputError(inputElement, "Incorrect password, try again.");
         }
+    } else if (msg.type == "log") {
+        document.getElementById("main").style.display = 'block';
+        document.getElementById("container2").style.display = 'none';
     }
 });
 
