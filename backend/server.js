@@ -13,13 +13,68 @@ function saveDB()
 {
   fs.writeFile('backend/db.json', JSON.stringify(db), err=> {if (err) {console.error(err);}});
 }
+function isDictEmpty(obj) {
+  // Check if the object has any keys
+  return Object.keys(obj).length === 0;
+}
 
-function logIn(email, password) {
-  console.log(`Logging in with: Email: ${email}, Password: ${password}`);
+function getData() {
+  let data = {
+    usernames: [],
+    emails: [],
+    passwords: []
+  };
+
+
+  ```
+  Example db entrance:
+
+  !! Whole Db shown here !!
+
+  {
+    Username111: {
+      email: "example@1234mail.com",
+      password: "1234"
+    }
+  }
+
+  ```
+  
+  if(!isDictEmpty(db)) {
+    for (const key in db) {
+      data.usernames.push(key);
+      data.emails.push(db[key].email);
+      data.passwords.push(db[key].password);
+    }
+    return data;
+  }
+  return false;
+  
+}
+
+function logIn(username, password) {
+  console.log(`Logging in with: Username: ${username}, Password: ${password}`);
+}
+
+function checkForUsername(username) {
+  data = getData();
+  let found = false;
+  if(data != false) {
+    data.usernames.forEach(item => {
+      if(item == username) {
+        found = true;
+      }
+    });
+    return found;
+  }
 }
 
 function signUp(username, email, password) {
-  console.log(`Signing up with: Username: ${username}, Email: ${email}, Password: ${password}`);
+  if(!checkForUsername(username)) {
+    console.log("Username does no exist and account will be created");
+  } else {
+    ws.send(JSON.stringify({type: "error", error: "usernameExists"}));
+  }
 }
 
 app.ws('/echo', (ws) => {
@@ -29,7 +84,7 @@ app.ws('/echo', (ws) => {
         data = JSON.parse(data);
 		console.log(JSON.stringify(data));
     if(data.type == "log"){
-      logIn(data.info.email,data.info.password);
+      logIn(data.info.username, data.info.password);
     } else if (data.type == "sign") {
       signUp(data.info.username, data.info.email, data.info.password);
     }

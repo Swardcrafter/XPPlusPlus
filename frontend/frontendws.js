@@ -10,14 +10,14 @@ ws.addEventListener("open", () => {
 
 ws.addEventListener("message", msg => {
     msg = JSON.parse(msg);
-    console.log(JSON.stringify(msg));
+    console.log(msg);
 });
 
-function logIn(email, password) {
+function logIn(username, password) {
     send({
         type: "log",
         info: {
-            email: email, 
+            username: username, 
             password: password
         }
     });
@@ -49,7 +49,7 @@ function handleFormSubmit(event) {
     const dataLength = Object.keys(formDataObj).length;
 
     if(dataLength == 2) {
-        logIn(formDataObj.email, formDataObj.password);
+        logIn(formDataObj.username, formDataObj.password);
     } else if (dataLength == 3) {
         signUp(formDataObj.username, formDataObj.email, formDataObj.password);
     }
