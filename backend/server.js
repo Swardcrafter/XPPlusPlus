@@ -14,12 +14,25 @@ function saveDB()
   fs.writeFile('backend/db.json', JSON.stringify(db), err=> {if (err) {console.error(err);}});
 }
 
+function logIn(email, password) {
+  console.log(`Logging in with: Email: ${email}, Password: ${password}`);
+}
+
+function signUp(username, email, password) {
+  console.log(`Signing up with: Username: ${username}, Email: ${email}, Password: ${password}`);
+}
+
 app.ws('/echo', (ws) => {
 	console.log("New client connected.");
 
     ws.on("message", data => {
         data = JSON.parse(data);
 		console.log(JSON.stringify(data));
+    if(data.type == "log"){
+      logIn(data.info.email,data.info.password);
+    } else if (data.type == "sign") {
+      signUp(data.info.username, data.info.email, data.info.password);
+    }
 	});
 	ws.on('close', () => {
         console.log(`Client has disconnected!`);
