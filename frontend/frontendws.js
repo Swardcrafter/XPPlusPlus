@@ -13,7 +13,6 @@ ws.addEventListener("message", msg => {
 });
 
 function handleFormSubmitLog(event) {
-	event.preventDefault();
     // Get the form data using FormData API
     const form = event.target;
     const formData = new FormData(form);
@@ -32,7 +31,6 @@ function handleFormSubmitLog(event) {
     
  }
  function handleFormSubmitSign(event) {
-	event.preventDefault();
     // Get the form data using FormData API
     const form = event.target;
     const formData = new FormData(form);
@@ -51,8 +49,8 @@ function handleFormSubmitLog(event) {
     
  }
 
- const logForm = document.getElementById('logForm');
- const signForm = document.getElementById('signForm');
+ const logForm = document.getElementById('login');
+ const signForm = document.getElementById('createAccount');
 
  // Add the event listener to the forms container for form submissions
  logForm.addEventListener('submit', handleFormSubmitLog);
