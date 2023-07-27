@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         loginForm.classList.add("form--hidden");
         createAccountForm.classList.remove("form--hidden");
-		console.log(e.target.value);
+		console.log(e.target);
     });
 
     document.querySelector("#linkLogin").addEventListener("click", e => {
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
 
         // Perform your AJAX/Fetch login
-		console.log(e.target.value);
+		console.log(e.target);
 
         setFormMessage(loginForm, "error", "Invalid username/password combination");
     });
