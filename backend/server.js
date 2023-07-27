@@ -50,7 +50,7 @@ function getData() {
   
 }
 
-function logIn(username, password) {
+function logIn(username, password, ws) {
   data = getData();
 	let found = false;
   if(data != false) {
@@ -118,7 +118,7 @@ app.ws('/echo', (ws) => {
         data = JSON.parse(data);
 		console.log(JSON.stringify(data));
     if(data.type == "log"){
-      logIn(data.info.username, data.info.password);
+      logIn(data.info.username, data.info.password, ws);
     } else if (data.type == "sign") {
       signUp(data.info.username, data.info.email, data.info.password, ws);
     }
