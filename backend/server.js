@@ -25,7 +25,6 @@ function getData() {
     passwords: []
   };
 
-
   /*
   Example db entrance:
 
@@ -38,7 +37,6 @@ function getData() {
     }
   }
 	*/
-  
   
   if(!isDictEmpty(db)) {
     for (const key in db) {
@@ -69,9 +67,18 @@ function checkForUsername(username) {
   }
 }
 
+function createAccount(username, email, password) {
+  db.username = {
+    email: email, 
+    password: password
+  };
+  saveDB()
+}
+
 function signUp(username, email, password, ws) {
   if(!checkForUsername(username)) {
-    console.log("Username does no exist and account will be created");
+    createAccount(username, email, password);
+    // Log in.
   } else {
     ws.send(JSON.stringify({type: "error", error: "usernameExists"}));
   }
