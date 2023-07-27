@@ -38,7 +38,7 @@ ws.addEventListener("message", msg => {
         }
     } else if (msg.type == "log") {
         document.getElementById("main").style.display = 'block';
-        document.getElementById("container2").style.display = 'none';
+        document.getElementById("formsContainer").style.display = 'none';
     }
 });
 
