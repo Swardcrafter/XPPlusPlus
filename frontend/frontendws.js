@@ -13,7 +13,6 @@ ws.addEventListener("message", msg => {
 });
 
 function handleFormSubmit(event) {
-
     // Get the form data using FormData API
     const form = event.target;
     const formData = new FormData(form);
@@ -27,9 +26,6 @@ function handleFormSubmit(event) {
     // Convert the object to JSON
     const jsonData = JSON.stringify(formDataObj);
 
-	if(jsonData.password != jsonData.confirmpassword) {
-		setInputError(inputElement, "Passwords do not match.");
-	}
 
     console.log(jsonData);
     
