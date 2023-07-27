@@ -10,7 +10,16 @@ ws.addEventListener("open", () => {
 
 ws.addEventListener("message", msg => {
     msg = JSON.parse(msg);
+    console.log(JSON.stringify(msg));
 });
+
+function logIn(email, password) {
+    console.log(`Logging in with the following info:\n  - Email: ${email}\n   - Password: ${password}`);
+}
+
+function signUp(username, email, password) {
+    console.log(`Signing up with the following info:\n  - Username: ${username}\n   - Email: ${email}\n   - Password: ${password}`);
+}
 
 function handleFormSubmit(event) {
 	event.preventDefault();
@@ -24,7 +33,13 @@ function handleFormSubmit(event) {
       formDataObj[key] = value;
     });
 
-    console.log(Object.keys(formDataObj).length);
+    const dataLength = Object.keys(formDataObj).length;
+
+    if(dataLength == 2) {
+        logIn(formDataObj.email, formDataObj.password);
+    } else if (dataLength == 3) {
+        signUp(formDataObj.username, formDataObj.email, formDataObj.password);
+    }
 
     // Convert the object to JSON
     const jsonData = JSON.stringify(formDataObj);
