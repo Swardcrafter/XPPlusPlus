@@ -8,9 +8,24 @@ ws.addEventListener("open", () => {
     console.log("We are connected");   
 });
 
+function setInputError(inputElement, message) {
+    inputElement.classList.add("form__input--error");
+    inputElement.parentElement.querySelector(".form__input-error-message").textContent = message;
+}
+
+function clearInputError(inputElement) {
+    inputElement.classList.remove("form__input--error");
+    inputElement.parentElement.querySelector(".form__input-error-message").textContent = "";
+}
+
 ws.addEventListener("message", msg => {
     msg = JSON.parse(msg.data);
-    console.log(msg);
+    if(msg.type == "error") {
+        if(msg.error == "usernameExists") {
+            inputElement = document.getElementById("usernameInput");
+            setInputError(inputElement, "An account with that usernam already exists.");
+        }
+    }
 });
 
 function logIn(username, password) {
