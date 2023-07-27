@@ -14,6 +14,7 @@ ws.addEventListener("message", msg => {
 
 function handleFormSubmit(event) {
     event.preventDefault(); // Prevent the default form submission
+	console.log("test");
 
     // Get the form data using FormData API
     const form = event.target;
