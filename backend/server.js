@@ -4,6 +4,15 @@ var expressWs = require('express-ws')
 var app = express()
 expressWs(app)
 
+const fs = require('fs');
+var data = fs.readFileSync('backend/db.json');
+
+var db = JSON.parse(data);
+
+function saveDB()
+{
+  fs.writeFile('backend/db.json', JSON.stringify(db), err=> {if (err) {console.error(err);}});
+}
 
 app.ws('/echo', (ws) => {
 	console.log("New client connected.");
@@ -14,6 +23,7 @@ app.ws('/echo', (ws) => {
 	});
 	ws.on('close', () => {
         console.log(`Client has disconnected!`);
+        saveDB();
     });
 });
 

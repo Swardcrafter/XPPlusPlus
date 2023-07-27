@@ -14,11 +14,24 @@ ws.addEventListener("message", msg => {
 });
 
 function logIn(email, password) {
-    console.log(`Logging in with the following info:\n  - Email: ${email}\n   - Password: ${password}`);
+    send({
+        type: "log",
+        info: {
+            email: email, 
+            password: password
+        }
+    });
 }
 
 function signUp(username, email, password) {
-    console.log(`Signing up with the following info:\n  - Username: ${username}\n   - Email: ${email}\n   - Password: ${password}`);
+    send({
+        type: "sign",
+        info: {
+            username: username,
+            email: email, 
+            password: password
+        }
+    });
 }
 
 function handleFormSubmit(event) {
