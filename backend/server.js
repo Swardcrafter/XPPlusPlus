@@ -142,6 +142,11 @@ app.get("/style.css", (req, res) => {
 	res.type("text/css");
 	res.sendFile(path.join(oneStepBack, "/frontend/style.css"));
   });
+  app.get("/style2.css", (req, res) => {
+    // Send the styles.css file with the correct MIME type
+    res.type("text/css");
+    res.sendFile(path.join(oneStepBack, "/frontend/style2.css"));
+    });
 
 app.get("/frontendws.js", (req, res) => {
 	res.setHeader("Content-Type", "application/javascript");

@@ -3,6 +3,11 @@ const ws = new WebSocket("wss://obsidian-syncify-main.saturnwillow.repl.co/echo"
 let loggedUsername = "";
 let loggedPassword = "";
 
+const style1 = document.getElementById("style1");
+const style2 = document.getElementById("style2");
+
+style2.disabled = true;
+
 document.getElementById("main").style.display = 'none';
 
 function send(data) {
@@ -39,6 +44,8 @@ ws.addEventListener("message", msg => {
     } else if (msg.type == "log") {
         document.getElementById("main").style.display = 'block';
         document.getElementById("formsContainer").style.display = 'none';
+        style1.disabled = true;
+        style2.disabled = false;
     }
 });
 
