@@ -33,8 +33,7 @@ function handleFormSubmit(event) {
     
  }
 
-// Add the event listener to the form submit event
-const loginForm = document.getElementById('login');
-loginForm.addEventListener('submit', handleFormSubmit);
-const signupForm = document.getElementById('createAccount');
-signupForm.addEventListener('submit', handleFormSubmit);
+ const formsContainer = document.getElementById('formsContainer');
+
+ // Add the event listener to the forms container for form submissions
+ formsContainer.addEventListener('submit', handleFormSubmit);
