@@ -24,6 +24,12 @@ ws.addEventListener("message", msg => {
         if(msg.error == "usernameExists") {
             inputElement = document.getElementById("usernameInput");
             setInputError(inputElement, "An account with that username already exists.");
+        } else if (msg.error == "noAccount") {
+            inputElement = document.getElementById("usernameInputLog");
+            setInputError(inputElement, "No account exists with that username.");
+        } else if (msg.error == "wrongPassword") {
+            inputElement = document.getElementById("passwordInputLog");
+            setInputError(inputElement, "Incorrect password, try again.");
         }
     }
 });

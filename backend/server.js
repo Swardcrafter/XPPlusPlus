@@ -51,7 +51,28 @@ function getData() {
 }
 
 function logIn(username, password) {
-  console.log(`Logging in with: Username: ${username}, Password: ${password}`);
+  data = getData();
+  if(data != false) {
+    data.usernames.forEach(item => {
+      if(item == username) {
+        found = true;
+      }
+    });
+    if(found == false) {
+      ws.send(JSON.stringify({type: "error", error: "noAccount"}));
+    } else if (found == true) {
+      if(data[username].password == password) {
+        ws.send(JSON.stringify({
+          type: "log", 
+          userInfo: {
+            username: username,
+            password: password
+          }}))
+      } else {
+        ws.send(JSON.stringify({type: "error", error: "wrongPassword"}));
+      }
+    }
+  }
 }
 
 function checkForUsername(username) {
@@ -78,7 +99,12 @@ function createAccount(username, email, password) {
 function signUp(username, email, password, ws) {
   if(!checkForUsername(username)) {
     createAccount(username, email, password);
-    // Log in.
+    ws.send(JSON.stringify({
+      type: "log", 
+      userInfo: {
+        username: username,
+        password: password
+    }}))
   } else {
     ws.send(JSON.stringify({type: "error", error: "usernameExists"}));
   }
