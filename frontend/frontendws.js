@@ -24,7 +24,7 @@ function handleFormSubmit(event) {
       formDataObj[key] = value;
     });
 
-    console.log(formDataObj.keys.length);
+    console.log(Object.keys(formDataObj).length);
 
     // Convert the object to JSON
     const jsonData = JSON.stringify(formDataObj);
