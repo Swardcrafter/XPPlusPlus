@@ -23,7 +23,7 @@ ws.addEventListener("message", msg => {
     if(msg.type == "error") {
         if(msg.error == "usernameExists") {
             inputElement = document.getElementById("usernameInput");
-            setInputError(inputElement, "An account with that usernam already exists.");
+            setInputError(inputElement, "An account with that username already exists.");
         }
     }
 });
