@@ -13,6 +13,7 @@ ws.addEventListener("message", msg => {
 });
 
 function handleFormSubmit(event) {
+	event.preventDefault();
     // Get the form data using FormData API
     const form = event.target;
     const formData = new FormData(form);
