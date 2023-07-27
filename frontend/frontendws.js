@@ -9,7 +9,7 @@ ws.addEventListener("open", () => {
 });
 
 ws.addEventListener("message", msg => {
-    msg = JSON.parse(msg);
+    msg = JSON.parse(msg.data);
     console.log(msg);
 });
 

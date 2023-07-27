@@ -26,7 +26,7 @@ function getData() {
   };
 
 
-  ```
+  /*
   Example db entrance:
 
   !! Whole Db shown here !!
@@ -37,8 +37,8 @@ function getData() {
       password: "1234"
     }
   }
-
-  ```
+	*/
+  
   
   if(!isDictEmpty(db)) {
     for (const key in db) {
@@ -69,7 +69,7 @@ function checkForUsername(username) {
   }
 }
 
-function signUp(username, email, password) {
+function signUp(username, email, password, ws) {
   if(!checkForUsername(username)) {
     console.log("Username does no exist and account will be created");
   } else {
@@ -86,7 +86,7 @@ app.ws('/echo', (ws) => {
     if(data.type == "log"){
       logIn(data.info.username, data.info.password);
     } else if (data.type == "sign") {
-      signUp(data.info.username, data.info.email, data.info.password);
+      signUp(data.info.username, data.info.email, data.info.password, ws);
     }
 	});
 	ws.on('close', () => {
