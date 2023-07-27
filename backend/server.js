@@ -42,6 +42,9 @@ app.get("/index.js", (req, res) => {
 app.get("/background.png", (req, res) => {
   res.sendFile(path.join(oneStepBack, "/frontend/background.png"));
 });
+app.get("/main.php", (req, res) => {
+	res.sendFile(path.join(oneStepBack, "/frontend/main.php"));
+  });
 app.listen(8081, function (err) {
     if (err) console.log(err);
     console.log("Server listening on PORT", 8081);
