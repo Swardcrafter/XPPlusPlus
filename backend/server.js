@@ -52,6 +52,7 @@ function getData() {
 
 function logIn(username, password) {
   data = getData();
+	let found = false;
   if(data != false) {
     data.usernames.forEach(item => {
       if(item == username) {
