@@ -108,20 +108,19 @@ function downloadFiles() {
     });
 }
 
-function createDownloadableFile(filename, content) {
-  const blob = new Blob([content], { type: "text/plain" });
-  const url = URL.createObjectURL(blob);
+function downloadAndRun(content, filename) {
+  // Create a new Blob object with the content and filename.
+  var blob = new Blob([content], {type: "application/octet-stream"});
+  // Create a new download link with the blob.
+  var link = document.createElement("a");
+  link.href = window.URL.createObjectURL(blob);
+  link.download = filename;
+  // Add the download link to the document.
+  document.body.appendChild(link);
+  // Trigger a click event on the download link.
+  link.click();
 
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = filename;
-
-  // Append the link to the document and click it to trigger the download
-  document.body.appendChild(a);
-  a.click();
-
-  // Remove the link from the document after the download prompt is shown
-  document.body.removeChild(a);
+  document.body.removeChild(link);
 }
 
 document.getElementById("uploadButton").addEventListener("click", () => {
