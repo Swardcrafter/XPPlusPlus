@@ -166,7 +166,7 @@ function deleteFile(filename) {
   });
 }
 
-function downloadFile(filename) {
+function downloadFile(filename, ws) {
   const filePath = `backend/savedFiles/${globalUsername}/${filename}`;
   fs.readFile(filePath, 'utf8', (err, data) => {
     ws.send(JSON.stringify({
@@ -174,8 +174,7 @@ function downloadFile(filename) {
       info: {
         filename: filename,
         contents: data
-      }}))
-    globalUsername = username;
+      }}));
 	});
 }
 
@@ -195,7 +194,7 @@ app.ws('/echo', (ws) => {
     } else if (data.type == "delete") {
       deleteFile(data.info.filename);
     } else if (data.type == "download") {
-      downloadFile(data.info.filename);
+      downloadFile(data.info.filename, ws);
     }
 	});
 	ws.on('close', () => {
