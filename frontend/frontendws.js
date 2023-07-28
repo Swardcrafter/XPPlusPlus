@@ -87,20 +87,27 @@ document.getElementById("uploadButton").addEventListener("click", () => {
             });
 
 function removeBars() {
-    const bars = document.getElementsByClassName('bar');
-    for (let i = bars.length - 1; i >= 0; i--) {
-        const checkbox = bars[i].querySelector('.checkbox');
-        if (checkbox.checked) {
-        bars[i].remove();
-        const filename = bars[i].querySelector('.bar-content').textContent;
-        ws.send(JSON.stringify({
-            type: "delete", info: {
-                filename: filename
-            }
-        }));
-        }
-        
+  const bars = document.getElementsByClassName('bar');
+  const filenamesToDelete = []; // Array to store filenames to delete
+
+  for (let i = bars.length - 1; i >= 0; i--) {
+    const checkbox = bars[i].querySelector('.checkbox');
+    if (checkbox.checked) {
+      const filename = bars[i].querySelector('.bar-content').textContent;
+      filenamesToDelete.push(filename); // Store the filename to delete
+      bars[i].remove();
     }
+  }
+
+  // Send filenames to delete to the server
+  filenamesToDelete.forEach((filename) => {
+    ws.send(JSON.stringify({
+      type: "delete",
+      info: {
+        filename: filename
+      }
+    }));
+  });
 }
         
 document.getElementById("fileInput").addEventListener("change", (event) => {
