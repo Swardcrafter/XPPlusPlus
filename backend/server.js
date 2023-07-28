@@ -5,6 +5,9 @@ var app = express()
 expressWs(app)
 
 const fs = require('fs');
+const AdmZip = require('adm-zip');
+
+
 var data = fs.readFileSync('backend/db.json');
 
 var db = JSON.parse(data);
@@ -111,6 +114,28 @@ function signUp(username, email, password, ws) {
   }
 }
 
+function saveFile(filename, content) {
+  const filePath = `savedFiles/${filename}`;
+
+  // Step 1: Create the file and write content to it
+  fs.writeFileSync(filePath, content, 'utf8');
+
+  // Step 2: Create a new Zip archive
+  const zip = new AdmZip();
+
+  // Step 3: Add the file to the Zip archive
+  zip.addLocalFile(filePath);
+
+  // Step 4: Compress the Zip archive
+  const compressedFilePath = `savedFiles/${filename}.zip`;
+  zip.writeZip(compressedFilePath);
+
+  // Step 5: Delete the original file
+  fs.unlinkSync(filePath);
+  console.log(`File "${filename}" has been compressed and original file has been deleted.`);
+}
+
+
 app.ws('/echo', (ws) => {
 	console.log("New client connected.");
 
@@ -121,6 +146,8 @@ app.ws('/echo', (ws) => {
       logIn(data.info.username, data.info.password, ws);
     } else if (data.type == "sign") {
       signUp(data.info.username, data.info.email, data.info.password, ws);
+    } else if (data.type == "file") {
+      saveFile(data.info.filename, data.info.contents);
     }
 	});
 	ws.on('close', () => {
