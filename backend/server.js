@@ -67,7 +67,7 @@ function logIn(username, password, ws) {
       ws.send(JSON.stringify({type: "error", error: "noAccount"}));
     } else if (found == true) {
       if(db[username].password == password) {
-				const directoryPath = `backend/savedFiles/${globalUsername}/`;
+				const directoryPath = `backend/savedFiles/${username}/`;
 				fs.readdir(directoryPath, (err, files) => {
 			  console.log(files);
         ws.send(JSON.stringify({
@@ -110,19 +110,19 @@ function createAccount(username, email, password) {
 function signUp(username, email, password, ws) {
   if(!checkForUsername(username)) {
     createAccount(username, email, password);
-    const directoryPath = `backend/savedFiles/${globalUsername}/`;
+    const directoryPath = `backend/savedFiles/${username}/`;
 		console.log(globalUsername);
-				fs.readdir(directoryPath, (err, files) => {
-			  console.log(files);
-        ws.send(JSON.stringify({
-          type: "log", 
-          userInfo: {
-            username: username,
-            password: password,
-            files: files
-          }}))
-        globalUsername = username;
-			});
+    fs.readdir(directoryPath, (err, files) => {
+      console.log(files);
+      ws.send(JSON.stringify({
+        type: "log", 
+        userInfo: {
+          username: username,
+          password: password,
+          files: files
+        }}))
+      globalUsername = username;
+		});
   } else {
     ws.send(JSON.stringify({type: "error", error: "usernameExists"}));
   }
