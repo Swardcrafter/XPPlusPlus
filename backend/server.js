@@ -67,11 +67,14 @@ function logIn(username, password, ws) {
       ws.send(JSON.stringify({type: "error", error: "noAccount"}));
     } else if (found == true) {
       if(db[username].password == password) {
+        const files = fs.readdirSync(directoryPath);
+        console.log(files);
         ws.send(JSON.stringify({
           type: "log", 
           userInfo: {
             username: username,
-            password: password
+            password: password,
+            files: files
           }}))
         globalUsername = username;
       } else {
@@ -105,11 +108,14 @@ function createAccount(username, email, password) {
 function signUp(username, email, password, ws) {
   if(!checkForUsername(username)) {
     createAccount(username, email, password);
+    const files = fs.readdirSync(directoryPath);
+    console.log(files);
     ws.send(JSON.stringify({
       type: "log", 
       userInfo: {
         username: username,
-        password: password
+        password: password,
+        files: files
     }}))
     globalUsername = username;
   } else {

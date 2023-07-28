@@ -46,6 +46,9 @@ ws.addEventListener("message", msg => {
         document.getElementById("formsContainer").style.display = 'none';
         style1.disabled = true;
         style2.disabled = false;
+        msg.userInfo.files.forEach((element) => {
+            createBar(element);
+        });
     }
 });
 
