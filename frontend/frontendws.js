@@ -30,6 +30,7 @@ function clearInputError(inputElement) {
 
 ws.addEventListener("message", msg => {
     msg = JSON.parse(msg.data);
+		console.log(`Server sent us: ${JSON.stringify(msg)}.`);
     if(msg.type == "error") {
         if(msg.error == "usernameExists") {
             inputElement = document.getElementById("usernameInput");
