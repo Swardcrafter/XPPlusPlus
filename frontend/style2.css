@@ -6,6 +6,13 @@ html {
 body {
   font-family: Arial, sans-serif;
 }
+
+style {
+  font-family: monospace;
+  white-space: pre;
+	display: block;
+}
+
 #uploadButton {
   width: 100px;
   height: 100px;
