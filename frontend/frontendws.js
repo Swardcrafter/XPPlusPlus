@@ -81,8 +81,18 @@ function createBar(text) {
 document.getElementById("uploadButton").addEventListener("click", () => {
               document.getElementById("fileInput").click();
             });
+
+function removeBars() {
+    const bars = document.getElementsByClassName('bar');
+    for (let i = bars.length - 1; i >= 0; i--) {
+        const checkbox = bars[i].querySelector('.checkbox');
+        if (checkbox.checked) {
+        bars[i].remove();
+        }
+    }
+}
         
-            document.getElementById("fileInput").addEventListener("change", (event) => {
+document.getElementById("fileInput").addEventListener("change", (event) => {
     const files = event.target.files;
     for (const file of files) {
       const filename = file.name;
