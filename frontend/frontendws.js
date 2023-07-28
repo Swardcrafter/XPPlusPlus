@@ -95,10 +95,22 @@ function removeBars() {
 document.getElementById("fileInput").addEventListener("change", (event) => {
     const files = event.target.files;
     for (const file of files) {
-      const filename = file.name;
-      createBar(filename);
+        const filename = file.name;
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            const fileContent = e.target.result;
+            createBar(filename);
+            ws.send(JSON.stringify({
+                type: "file",
+                info: {
+                    filename: filename,
+                    contents: fileContent
+                }
+            }))
+        }
     }
-  });
+});
 
 
 function logIn(username, password) {
