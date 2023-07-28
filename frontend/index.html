@@ -13,7 +13,25 @@
 
     <div id="main">
 
-        <h1>Main Stuff Here</h1>
+        <div id="uploadButton">+</div>
+        <input type="file" id="fileInput" multiple accept=".md"/>
+        <script>
+            document.getElementById("uploadButton").addEventListener("click", () => {
+              document.getElementById("fileInput").click();
+            });
+        
+            document.getElementById("fileInput").addEventListener("change", (event) => {
+              const files = event.target.files;
+              if (files.length > 0) {
+                for (const file of files) {
+                  console.log("File/Folder Name: ", file.name);
+                  console.log("File/Folder Type: ", file.type);
+                  // Here, you can handle the uploaded file(s) as needed.
+                  // For example, you can read the content of the file, process it, or send it to a server.
+                }
+              }
+            });
+        </script>
 
     </div>
 
