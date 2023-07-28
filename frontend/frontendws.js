@@ -92,7 +92,6 @@ function downloadFiles() {
         if (checkbox.checked) {
             const filename = bars[i].querySelector('.bar-content').textContent;
             filenamesToDownload.push(filename); // Store the filename to download
-            bars[i].remove();
         }
     }
 
