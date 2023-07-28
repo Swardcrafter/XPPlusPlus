@@ -5,7 +5,6 @@ var app = express()
 expressWs(app)
 
 const fs = require('fs');
-const path = require('path');
 
 let globalUsername = "";
 
