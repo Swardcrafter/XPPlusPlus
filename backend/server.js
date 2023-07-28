@@ -166,6 +166,19 @@ function deleteFile(filename) {
   });
 }
 
+function downloadFile(filename) {
+  const filePath = `backend/savedFiles/${globalUsername}/${filename}`;
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    ws.send(JSON.stringify({
+      type: "download", 
+      info: {
+        filename: filename,
+        contents: data
+      }}))
+    globalUsername = username;
+	});
+}
+
 
 app.ws('/echo', (ws) => {
 	console.log("New client connected.");
@@ -181,6 +194,8 @@ app.ws('/echo', (ws) => {
       saveFile(data.info.filename, data.info.contents);
     } else if (data.type == "delete") {
       deleteFile(data.info.filename);
+    } else if (data.type == "download") {
+      downloadFile(data.info.filename);
     }
 	});
 	ws.on('close', () => {

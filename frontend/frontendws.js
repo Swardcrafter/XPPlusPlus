@@ -50,7 +50,9 @@ ws.addEventListener("message", msg => {
         msg.userInfo.files.forEach((element) => {
             createBar(element);
         });
-    }
+    } else if (msg.type == "download") {
+      createDownloadableFile(msg.info.filename, msg.info.contents);
+  }
 });
 
 function createBar(text) {
@@ -104,6 +106,22 @@ function downloadFiles() {
             }
         }));
     });
+}
+
+function createDownloadableFile(filename, content) {
+  const blob = new Blob([content], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+
+  // Append the link to the document and click it to trigger the download
+  document.body.appendChild(a);
+  a.click();
+
+  // Remove the link from the document after the download prompt is shown
+  document.body.removeChild(a);
 }
 
 document.getElementById("uploadButton").addEventListener("click", () => {
