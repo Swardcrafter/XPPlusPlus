@@ -80,17 +80,7 @@ function createBar(text) {
     bar.appendChild(barContent);
 
     barsContainer.appendChild(bar);
-
-    // Add a click event listener to the checkbox and prevent event propagation
-    checkbox.addEventListener("click", (event) => {
-        event.stopPropagation();
-    });
-
-    // Add a click event listener to the bar element
     bar.addEventListener("click", () => {
-        // Check the checkbox programmatically when clicking the bar
-        checkbox.checked = !checkbox.checked;
-        // Call the function when the bar is clicked and pass in the text inside the bar
         downloadFile(text);
     });
 }
