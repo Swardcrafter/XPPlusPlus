@@ -143,6 +143,10 @@ function saveFile(filename, content) {
   console.log(`File "${filename}" created.`);
 }
 
+function deleteFile(filename) {
+
+}
+
 
 app.ws('/echo', (ws) => {
 	console.log("New client connected.");
@@ -156,6 +160,8 @@ app.ws('/echo', (ws) => {
       signUp(data.info.username, data.info.email, data.info.password, ws);
     } else if (data.type == "file") {
       saveFile(data.info.filename, data.info.contents);
+    } else if (data.type == "delete") {
+      deleteFile(data.info.filename);
     }
 	});
 	ws.on('close', () => {
