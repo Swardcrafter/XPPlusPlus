@@ -80,7 +80,19 @@ function createBar(text) {
     bar.appendChild(barContent);
 
     barsContainer.appendChild(bar);
-  }
+    bar.addEventListener("click", () => {
+        downloadFile(text);
+    });
+}
+
+function downloadFile(filename) {
+    ws.send(JSON.stringify({
+        type: "download",
+        info: {
+            filename: filename
+        }
+    }));
+}
 
 document.getElementById("uploadButton").addEventListener("click", () => {
               document.getElementById("fileInput").click();
