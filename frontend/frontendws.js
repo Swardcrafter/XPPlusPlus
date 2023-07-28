@@ -92,7 +92,14 @@ function removeBars() {
         const checkbox = bars[i].querySelector('.checkbox');
         if (checkbox.checked) {
         bars[i].remove();
+        const filename = bars[i].querySelector('.bar-content').textContent;
+        ws.send(JSON.stringify({
+            type: "delete", info: {
+                filename: filename
+            }
+        }));
         }
+        
     }
 }
         
