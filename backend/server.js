@@ -5,7 +5,7 @@ var app = express()
 expressWs(app)
 
 const fs = require('fs');
-const AdmZip = require('adm-zip');
+const path = require('path');
 
 let globalUsername = "";
 
@@ -144,7 +144,27 @@ function saveFile(filename, content) {
 }
 
 function deleteFile(filename) {
+  const directoryPath = `backend/savedFiles/${globalUsername}`
+  const filePath = path.join(directoryPath, filename);
 
+  // Check if the file exists before attempting to delete it
+  fs.access(filePath, fs.constants.F_OK, (err) => {
+    if (err) {
+      // The file doesn't exist, handle the error if needed
+      console.error(`File ${filename} does not exist.`);
+      return;
+    }
+
+    // The file exists, proceed with the deletion
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        // An error occurred while deleting the file, handle the error if needed
+        console.error(`Error deleting file ${filename}: ${err.message}`);
+      } else {
+        console.log(`File ${filename} has been deleted.`);
+      }
+    });
+  });
 }
 
 
