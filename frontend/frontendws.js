@@ -56,9 +56,10 @@ ws.addEventListener("message", msg => {
 function createBar(text) {
     const barsContainer = document.getElementById("bars-container");
     const bar = document.createElement("a");
-    bar.href = "#";
+		bar.href = "#";
     bar.className = "bar";
 
+	
     const label = document.createElement("label");
     label.className = "checkbox-container";
 
@@ -80,12 +81,9 @@ function createBar(text) {
     bar.appendChild(barContent);
 
     barsContainer.appendChild(bar);
-    bar.addEventListener("click", () => {
-        downloadFile(text);
-    });
 }
 
-function downloadFile(filename) {
+function downloadFiles() {
     ws.send(JSON.stringify({
         type: "download",
         info: {
