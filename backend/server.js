@@ -7,6 +7,7 @@ expressWs(app)
 const fs = require('fs');
 const AdmZip = require('adm-zip');
 
+let globalUsername = "";
 
 var data = fs.readFileSync('backend/db.json');
 
@@ -72,6 +73,7 @@ function logIn(username, password, ws) {
             username: username,
             password: password
           }}))
+        globalUsername = username;
       } else {
         ws.send(JSON.stringify({type: "error", error: "wrongPassword"}));
       }
@@ -109,14 +111,20 @@ function signUp(username, email, password, ws) {
         username: username,
         password: password
     }}))
+    globalUsername = username;
   } else {
     ws.send(JSON.stringify({type: "error", error: "usernameExists"}));
   }
 }
 
 function saveFile(filename, content) {
-	filename = filename.replace(/[<>:" /\\|?*]/g, '');
-  const filePath = `backend/savedFiles/${filename}`;
+	filename = filename.replace(/[<>:"/\\|?*]/g, '');
+  const filePath = `backend/savedFiles/${globalUsername}/${filename}`;
+
+  const userDirectoryPath = `backend/savedFiles/${globalUsername}`;
+  if (!fs.existsSync(userDirectoryPath)) {
+    fs.mkdirSync(userDirectoryPath, { recursive: true });
+  }
 
   // Step 1: Create the file and write content to it
   fs.writeFileSync(filePath, content, 'utf8');
