@@ -202,18 +202,9 @@
 		<div class="separator"></div>
 
         <input type="file" id="fileInput" multiple accept=".md"/>
-        
-        <script>
-            document.getElementById("uploadButton").addEventListener("click", () => {
-              document.getElementById("fileInput").click();
-            });
-        
-            document.getElementById("fileInput").addEventListener("change", (event) => {
-              const files = event.target.files;
-            });
-        </script>
 
-		<div class="bars-container">
+
+		<div class="bars-container" id="bars-container">
       
         </div>
 

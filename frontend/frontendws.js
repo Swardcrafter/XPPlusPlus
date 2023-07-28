@@ -50,17 +50,45 @@ ws.addEventListener("message", msg => {
 });
 
 function createBar(text) {
-    const barsContainer = document.getElementById("barsContainer");
-    const bar = document.createElement("div");
+    const barsContainer = document.getElementById("bars-container");
+    const bar = document.createElement("a");
+    bar.href = "#";
     bar.className = "bar";
-    bar.textContent = text;
-    barsContainer.appendChild(bar);
-}
 
-// Call the function to create bars with different text
-createBar("Bar 1");
-createBar("Bar 2");
-createBar("Bar 3");
+    const label = document.createElement("label");
+    label.className = "checkbox-container";
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.className = "checkbox";
+
+    const checkmark = document.createElement("span");
+    checkmark.className = "checkmark";
+
+    label.appendChild(checkbox);
+    label.appendChild(checkmark);
+
+    const barContent = document.createElement("div");
+    barContent.className = "bar-content";
+    barContent.textContent = text;
+
+    bar.appendChild(label);
+    bar.appendChild(barContent);
+
+    barsContainer.appendChild(bar);
+  }
+
+document.getElementById("uploadButton").addEventListener("click", () => {
+              document.getElementById("fileInput").click();
+            });
+        
+            document.getElementById("fileInput").addEventListener("change", (event) => {
+    const files = event.target.files;
+    for (const file of files) {
+      const filename = file.name;
+      createBar(filename);
+    }
+  });
 
 
 function logIn(username, password) {
