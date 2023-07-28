@@ -84,12 +84,27 @@ function createBar(text) {
 }
 
 function downloadFiles() {
-    ws.send(JSON.stringify({
-        type: "download",
-        info: {
-            filename: filename
+    const bars = document.getElementsByClassName('bar');
+    const filenamesToDownload = []; // Array to store filenames to download
+
+    for (let i = bars.length - 1; i >= 0; i--) {
+        const checkbox = bars[i].querySelector('.checkbox');
+        if (checkbox.checked) {
+            const filename = bars[i].querySelector('.bar-content').textContent;
+            filenamesToDownload.push(filename); // Store the filename to download
+            bars[i].remove();
         }
-    }));
+    }
+
+    // Send filenames to download to the server
+    filenamesToDownload.forEach((filename) => {
+        ws.send(JSON.stringify({
+            type: "download",
+            info: {
+                filename: filename
+            }
+        }));
+    });
 }
 
 document.getElementById("uploadButton").addEventListener("click", () => {
