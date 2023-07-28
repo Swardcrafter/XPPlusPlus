@@ -115,24 +115,13 @@ function signUp(username, email, password, ws) {
 }
 
 function saveFile(filename, content) {
-  const filePath = `savedFiles/${filename}`;
+	filename = filename.replace(/[<>:" /\\|?*]/g, '');
+  const filePath = `backend/savedFiles/${filename}`;
 
   // Step 1: Create the file and write content to it
   fs.writeFileSync(filePath, content, 'utf8');
 
-  // Step 2: Create a new Zip archive
-  const zip = new AdmZip();
-
-  // Step 3: Add the file to the Zip archive
-  zip.addLocalFile(filePath);
-
-  // Step 4: Compress the Zip archive
-  const compressedFilePath = `savedFiles/${filename}.zip`;
-  zip.writeZip(compressedFilePath);
-
-  // Step 5: Delete the original file
-  fs.unlinkSync(filePath);
-  console.log(`File "${filename}" has been compressed and original file has been deleted.`);
+  console.log(`File "${filename}" created.`);
 }
 
 
