@@ -49,6 +49,20 @@ ws.addEventListener("message", msg => {
     }
 });
 
+function createBar(text) {
+    const barsContainer = document.getElementById("barsContainer");
+    const bar = document.createElement("div");
+    bar.className = "bar";
+    bar.textContent = text;
+    barsContainer.appendChild(bar);
+}
+
+// Call the function to create bars with different text
+createBar("Bar 1");
+createBar("Bar 2");
+createBar("Bar 3");
+
+
 function logIn(username, password) {
     send({
         type: "log",
