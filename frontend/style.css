@@ -1,18 +1,36 @@
 .input-container {
-	display: inline-block;
-	margin-right: 10px;
-	position: relative;
-  }
-  
-  .input-field {
-	padding: 10px;
-	border: 1px solid #ccc;
-	font-size: 16px;
-	width: 150px;
-  }
-  
-  .input-field::placeholder {
-	color: #999;
-	font-style: italic;
-  }
-  
+    display: inline-block;
+    margin-right: 10px;
+    position: relative;
+}
+
+.input-field,
+.button-field {
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    display: block; /* Set to block to allow automatic width */
+    min-width: 150px; /* Added to set a minimum width for better appearance */
+}
+
+.input-field::placeholder,
+.button-field::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+/* New styles for the button */
+.button-field {
+    background-color: #007bff; /* Blue background color */
+    color: white; /* Text color */
+    cursor: pointer; /* Change cursor on hover */
+    border: none; /* Remove border */
+    text-align: center; /* Center text within the button */
+    padding: 10px 20px; /* Adjust padding */
+    border-radius: 4px; /* Add rounded corners */
+    transition: background-color 0.3s ease-in-out; /* Add transition for hover effect */
+}
+
+.button-field:hover {
+    background-color: #0056b3; /* Darker background color on hover */
+}
