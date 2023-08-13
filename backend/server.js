@@ -6,7 +6,7 @@ expressWs(app)
 
 
 function splitStringBetweenNumbers(inputString) {
-  const regex = /(\d+)>(\d+)/;
+  const regex = /(-?\d+)>(-?\d+)/;
   const match = inputString.match(regex);
 
   if (match) {
@@ -40,6 +40,10 @@ function handleData(data, ws) {
   */
 
   let outputMsg = ""
+	console.log(data.varnumb)
+	console.log(someData)
+	console.log(startingNumb)
+	console.log(endingNumb)
   for (let i = startingNumb; i <= endingNumb; i++) {
     outputMsg += replaceVarName(data.message, data.varname, i) + "\n";
   }
