@@ -11,8 +11,6 @@ function copyToClipboard() {
 
 function sendTheMessage() {
 	const text = document.getElementById('message').innerText;
-	const endvar = document.getElementById('end-variable').value;
-  const startvar = document.getElementById('start-variable').value;
   const varnumb = document.getElementById('variable-numbers').value;
   const varname = document.getElementById('variable-name').value;
 	const message = document.getElementById('message').value;
@@ -20,8 +18,6 @@ function sendTheMessage() {
   send({
 		type: "message",
 		data: {
-			startvar: startvar,
-			endvar: endvar,
 			varnumb: varnumb,
 			varname: varname,
 			message: message

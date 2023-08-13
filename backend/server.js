@@ -5,6 +5,47 @@ var app = express()
 expressWs(app)
 
 
+function splitStringBetweenNumbers(inputString) {
+  const regex = /(\d+)>(\d+)/;
+  const match = inputString.match(regex);
+
+  if (match) {
+    const firstNumber = parseInt(match[1]);
+    const secondNumber = parseInt(match[2]);
+    
+    return [firstNumber, secondNumber];
+  } else {
+    return null;
+  }
+}
+
+function replaceVarName(message, varname, i) {
+  const regex = new RegExp(`\\b${varname}\\b`, 'g');
+  return message.replace(regex, i);
+}
+
+
+function handleData(data) {
+  const someData = splitStringBetweenNumbers(data.varnumb)
+  const startingNumb = someData[0]
+  const endingNumb = someData[1]
+  ```
+  type: "message",
+		data: {
+			varnumb: varnumb,
+			varname: varname,
+			message: message
+		}
+  ```
+
+  let outputMsg = ""
+  for (let i = startingNumb; i <= endingNumb; i++) {
+    outputMsg += replaceVarName(data.message, data.varname, i) + "\n";
+  }
+
+  console.log(outputMsg)
+}
+
 
 app.ws('/echo', (ws) => {
 	console.log("New client connected.");
@@ -12,7 +53,9 @@ app.ws('/echo', (ws) => {
     ws.on("message", data => {
         data = JSON.parse(data);
 		console.log(JSON.stringify(data));
-    
+    if(data.type == "message") {
+      handleData(data.data);
+    }
 	});
 	ws.on('close', () => {
         console.log(`Client has disconnected!`);
