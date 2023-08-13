@@ -15,6 +15,7 @@ function sendTheMessage() {
   const startvar = document.getElementById('start-variable').value;
   const varnumb = document.getElementById('variable-numbers').value;
   const varname = document.getElementById('variable-name').value;
+	const message = document.getElementById('message').value;
 
   send({
 		type: "message",
@@ -22,7 +23,8 @@ function sendTheMessage() {
 			startvar: startvar,
 			endvar: endvar,
 			varnumb: varnumb,
-			varname: varname
+			varname: varname,
+			message: message
 		}
 	})
 }
