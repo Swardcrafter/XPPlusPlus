@@ -20,30 +20,34 @@ function splitStringBetweenNumbers(inputString) {
 }
 
 function replaceVarName(message, varname, i) {
-  const regex = new RegExp(`\\b${varname}\\b`, 'g');
-  return message.replace(regex, i);
+	const replacer = new RegExp(varname, 'g')
+  message = message.replace(replacer, i);
+	return message
 }
 
 
-function handleData(data) {
+function handleData(data, ws) {
   const someData = splitStringBetweenNumbers(data.varnumb)
   const startingNumb = someData[0]
   const endingNumb = someData[1]
-  ```
+  /*
   type: "message",
 		data: {
 			varnumb: varnumb,
 			varname: varname,
 			message: message
 		}
-  ```
+  */
 
   let outputMsg = ""
   for (let i = startingNumb; i <= endingNumb; i++) {
     outputMsg += replaceVarName(data.message, data.varname, i) + "\n";
   }
 
-  console.log(outputMsg)
+  ws.send(JSON.stringify({
+		type: "output",
+		data: outputMsg
+	}))
 }
 
 
@@ -54,7 +58,7 @@ app.ws('/echo', (ws) => {
         data = JSON.parse(data);
 		console.log(JSON.stringify(data));
     if(data.type == "message") {
-      handleData(data.data);
+      handleData(data.data, ws);
     }
 	});
 	ws.on('close', () => {
