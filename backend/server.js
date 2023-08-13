@@ -12,6 +12,7 @@ app.ws('/echo', (ws) => {
     ws.on("message", data => {
         data = JSON.parse(data);
 		console.log(JSON.stringify(data));
+    
 	});
 	ws.on('close', () => {
         console.log(`Client has disconnected!`);
