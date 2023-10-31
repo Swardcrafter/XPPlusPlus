@@ -1,6 +1,5 @@
 var express = require('express')
 var expressWs = require('express-ws')
-var mysql = require('mysql');
 const host = process.env['host'];
 const username = process.env['username'];
 const password = process.env['password'];
@@ -8,20 +7,6 @@ const password = process.env['password'];
 var app = express()
 expressWs(app)
 
-var con = mysql.createConnection({
-  host: host,
-  user: username,
-  password: password
-});
-
-con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
-	con.query(sql, function (err, result) {
-		if (err) throw err;
-		console.log("Result: " + result);
-	  });
-});
 
 
 app.ws('/echo', (ws) => {
@@ -33,7 +18,6 @@ app.ws('/echo', (ws) => {
 	});
 	ws.on('close', () => {
         console.log(`Client has disconnected!`);
-        saveDB();
     });
 });
 
